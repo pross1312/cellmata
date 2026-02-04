@@ -111,14 +111,20 @@ int main() {
     while (!WindowShouldClose()) {
         BeginDrawing();
         ClearBackground(BLACK);
-        // update(grid, ROWS, COLS, major_rule);
+        update(grid, ROWS, COLS, major_rule);
         // update(grid, ROWS, COLS, life_rule);
-        update(grid, ROWS, COLS, minor_rule);
+        // update(grid, ROWS, COLS, minor_rule);
+        display(grid, ROWS, COLS);
+        EndDrawing();
+
         if (IsKeyPressed(KEY_SPACE)){ 
             randomize(grid, ROWS*COLS);
         }
-        display(grid, ROWS, COLS);
-        EndDrawing();
+        if (IsKeyPressed(KEY_S)) {
+            Image image = LoadImageFromScreen();
+            ExportImage(image, "output.png");
+            UnloadImage(image);
+        }
     }
     CloseWindow();
     return 0;
